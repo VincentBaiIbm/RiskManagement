@@ -12,13 +12,47 @@
   "dependencies": {
     "@sap/cds": "5.1.5",
     "@sap/cds-dk": "4.1.5",
-    "express": "^4"
+    "@sap/xsenv": "^3.2.2",
+    "@sap/xssec": "^3.2.13",
+    "express": "^4",
+    "hdb": "^0.18.3",
+    "passport": "^0.5.2"
   },
   "devDependencies": {
-    "@sap/ux-specification": "^1.96.2",
+    "@sap/ux-specification": "^1.100.0",
     "sqlite3": "^5.0.2"
   },
   "scripts": {
     "start": "cds run"
+  },
+  "sapux": [
+    "app/risk"
+  ],
+  "cds": {
+    "requires": {
+      "API_BUSINESS_PARTNER": {
+        "kind": "odata",
+        "model": "srv/external/API_BUSINESS_PARTNER",
+        "[development]": {
+          "credentials": {
+            "url": "https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_BUSINESS_PARTNER/"
+          }
+        },
+        "[production]": {
+          "credentials": {
+            "destination": "API_BUSINESS_PARTNER"
+          }
+        }
+      },
+      "db": {
+        "kind": "sql"
+      },
+      "xsuaa": {
+        "kind": "xsuaa"
+      }
+    },
+    "hana": {
+      "deploy-format": "hdbtable"
+    }
   }
 }
